@@ -25,6 +25,11 @@
     - name: clear the box
       include: tasks/clear_box.yml
       when: clear_box
+
+    - name: import db data
+      include: tasks/import_db_data.yml
+      when: data_env in ('staging','production')
+
     - name: check if wordpress theme directory already exists
       stat:
         path: "{{ wordpress_installs[0].path }}/wp-content/themes/{{ wordpress_installs[0].themes[0].name }}"
