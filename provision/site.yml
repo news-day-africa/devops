@@ -78,5 +78,5 @@
     - role: tersmitten.wordpress
       notify: restart apache
 
-    - role: wp_filters
-      notify: restart apache
+#    - role: wp_filters
+#      notify: restart apache
