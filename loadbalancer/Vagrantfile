@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.memory = "1024"
+    vb.memory = "256"
   end
 
   config.vm.provision "file", source: "~/.ssh/news_day_africa_id_rsa", destination: "/home/ubuntu/news_day_africa_id_rsa"

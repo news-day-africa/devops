@@ -35,12 +35,12 @@
       when: not theme_dir.stat.exists
       
   post_tasks:
-    - name: restore_uploads
-      include: tasks/restore_uploads.yml
-
     - name: setup ajax load more plugin
       include: tasks/wp_alm.yml
       tags: wip
+
+    - name: restore_uploads
+      include: tasks/restore_uploads.yml
 
     - name: adjust urls
       include: tasks/adjust_urls.yml
@@ -58,6 +58,8 @@
       when: data_env in ('fixtures')
       tags: wip
 
+    - name: Ensure wp_admin password is set correctly after import from production or staging db
+      shell: wp-cli user --allow-root --no-color --path="{{wordpress_installs[0].path}}" update "{{wordpress_installs[0].admin_name}}" --user_pass="{{wordpress_installs[0].admin_password}}"
     - name: restart apache
       service: name=apache2 state=restarted
   roles:
