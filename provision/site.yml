@@ -38,6 +38,10 @@
     - name: restore_uploads
       include: tasks/restore_uploads.yml
 
+    - name: setup ajax load more plugin
+      include: tasks/wp_alm.yml
+      tags: wip
+
     - name: adjust urls
       include: tasks/adjust_urls.yml
     - name: add SSL settings for reverse proxy
