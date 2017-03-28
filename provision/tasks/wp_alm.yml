@@ -17,5 +17,5 @@
 
 - name: copy alm repeater template file
   copy:
-    dest: /var/www/html/wp-content/plugins/ajax-load-more/core/repeater/default.php
+    dest: "{{wordpress_installs[0].path}}/wp-content/plugins/ajax-load-more/core/repeater/default.php"
     src: files/alm_repeater_template.php
