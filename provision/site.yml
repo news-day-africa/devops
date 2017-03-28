@@ -9,7 +9,7 @@
     install_fail2ban: true
 
   vars_files:
-    - "./vars/{{lookup('env','ENV_FILE')}}.yml"
+    - "./vars/webserver.yml"
 
   pre_tasks:
     - debug: msg="Configuring the following host - {{ ansible_host}}"
@@ -25,7 +25,6 @@
     - name: clear the box
       include: tasks/clear_box.yml
       when: clear_box
-
     - name: check if wordpress theme directory already exists
       stat:
         path: "{{ wordpress_installs[0].path }}/wp-content/themes/{{ wordpress_installs[0].themes[0].name }}"
@@ -52,17 +51,21 @@
 
     - name: import fixtures data
       include: tasks/import_fixtures.yml
-      when: load_fixtures
+      when: data_env in ('fixtures')
       tags: wip
 
     - name: restart apache
       service: name=apache2 state=restarted
   roles:
+
     - role: database
       dbhost: "{{ wordpress_installs[0].dbhost}}"
       dbname: "{{ wordpress_installs[0].dbname }}"
       dbuser: "{{ wordpress_installs[0].dbuser }}"
       dbpass: "{{ wordpress_installs[0].dbpass }}"
+
+    - role: import_db_data
+      when: data_env in ('staging','production')
 
     - role: webserver
 
