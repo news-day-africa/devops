@@ -59,6 +59,9 @@
     - name: restore_uploads
       include: tasks/restore_uploads.yml
 
+    - name: restore_uploads
+      include: tasks/restore_uploads.yml
+
     - name: adjust urls
       include: tasks/adjust_urls.yml
 #   - name: add SSL settings for reverse proxy
