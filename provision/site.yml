@@ -44,14 +44,14 @@
 
     - name: adjust urls
       include: tasks/adjust_urls.yml
-    - name: add SSL settings for reverse proxy
-      blockinfile:
-        dest: "{{ wordpress_installs[0].path }}/wp-config.php"
-        insertbefore: "^// \\*\\* MySQL settings \\*\\* //"
-        block: |
-          define('FORCE_SSL_ADMIN', true);
-          if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false)
-          $_SERVER['HTTPS']='on';
+#   - name: add SSL settings for reverse proxy
+#     blockinfile:
+#       dest: "{{ wordpress_installs[0].path }}/wp-config.php"
+#       insertbefore: "^// \\*\\* MySQL settings \\*\\* //"
+#       block: |
+#         define('FORCE_SSL_ADMIN', true);
+#         if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false)
+#         $_SERVER['HTTPS']='on';
 
     - name: import fixtures data
       include: tasks/import_fixtures.yml
