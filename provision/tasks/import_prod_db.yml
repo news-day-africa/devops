@@ -1,7 +1,0 @@
-- name: import the prod data to staging 
-  shell: mysql -D {{wordpress_installs[0].dbname}} </tmp/datadump.sql
-
-- name: clean dump files
-  file:
-    state: absent
-    path: "/tmp/datadump.sql"
